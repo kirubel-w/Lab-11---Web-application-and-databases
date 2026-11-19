@@ -1,11 +1,15 @@
+{{!-- Display the error page heading --}}
 <h1>Error</h1>
 
+{{!-- Show a message when something goes wrong --}}
 <p>We're so sorry - something went wrong.</p>
 
+{{!-- Display the error message if one is available --}}
 <p></p>
 {{#if message}}
 {{ message }}
 {{/if}}
 </p>
 
+{{!-- Provide a link back to the home page --}}
 <a href="/">Return to the home page</a>
