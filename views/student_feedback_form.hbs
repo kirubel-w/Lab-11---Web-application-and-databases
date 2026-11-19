@@ -1,9 +1,13 @@
+
+<!-- Display the heading for the feedback form -->
 <div class="header bg-secondary-subtle mb-4 p-4 rounded-3 text-center">
     <h1>Please provide feedback. You may do so anonymously.</h1>
 </div>
 
+<!-- Create a row to hold the instructions and feedback form -->
 <div class="row">
 
+    <!-- First column displays the instructions -->
     <div class="col-md-5">
         <h2>Instructions</h2>
 
@@ -15,56 +19,66 @@
             <a href="mailto:feedback@minneapolis.edu">feedback@minneapolis.edu</a>
             or talk to your academic advisor, councellor, faculty members, or other college staff.
         </p>
-    </div> <!-- end of first instructions col div -->
+    </div> <!-- End of the instructions column -->
 
+    <!-- Second column contains the feedback form -->
     <div class="col-md-7">
+
+        <!-- Send the form data to the server using POST -->
         <form id="feedback-form" method="POST" action="/submit-feedback">
 
+            <!-- Allow users to enter their name -->
             <label class="form-label" for="name">Name</label>
             <input class="form-control" id="name" name="name">
             <br>
 
+            <!-- Allow users to enter their email address -->
             <label class="form-label" for="email">email</label>
             <input class="form-control" id="email" type="email" name="email">
             <br>
 
+            <!-- Require users to enter their feedback comments -->
             <label class="form-label" for="comments">Comments</label>
             <textarea class="form-control" id="comments" name="comments" required></textarea>
             <br>
 
+            <!-- Ask whether the user is currently a student -->
             <p class="mx-2">Are you a current student?</p>
 
+            <!-- Option for current students -->
             <div class="form-check">
                 <input class="form-check-input" id="yes" type="radio" value="yes" name="isCurrentStudent">
                 <label class="form-check-label" for="yes">Yes</label>
             </div>
 
+            <!-- Option for users who are not current students -->
             <div class="form-check">
                 <input class="form-check-input" id="no" type="radio" value="no" name="isCurrentStudent">
                 <label class="form-check-label" for="no">No</label>
             </div>
             <br>
 
+            <!-- Button to submit the feedback form -->
             <input id="submit-button" class="btn btn-primary" type="submit">
 
         </form>
-    </div> <!-- end of second form col div -->
+    </div> <!-- End of the feedback form column -->
 
-</div> <!-- end of the row div that contains both columns -->
+</div> <!-- End of the row containing both columns -->
 
 <script>
 
+    // Select the feedback form and submit button
     let feedbackForm = document.querySelector('#feedback-form')
     let feedbackSubmitButton = document.querySelector('#submit-button')
 
-    // Ensure button is enabled and says "Submit" when the page is loaded
+    // Enable the button and reset its text when the page is shown
     window.addEventListener('pageshow', function () {
         feedbackSubmitButton.disabled = false
         feedbackSubmitButton.value = "Submit"
     })
 
-    // Disable button and change button text to "Submitting..." when the user 
-    // has entered valid data in the form and clicked the submit button 
+    // Change the button text and disable it after a valid form submission
     feedbackForm.addEventListener('submit', function () {
         feedbackSubmitButton.value = "Submitting..."
         feedbackSubmitButton.disabled = true
