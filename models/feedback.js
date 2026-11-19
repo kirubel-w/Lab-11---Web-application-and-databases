@@ -1,13 +1,13 @@
-// define the feedback model - define the table in the database,
-// and defines the structure of feedback objects in the code
+// Define the Feedback model, which sets up the database table
+// and determines how feedback data is structured
 
 const { DataTypes } = require('sequelize')
 
 module.exports = (sequelizeDatabase) => {
 
     const Feedback = sequelizeDatabase.define(
-        'Feedback',  // name of the table
-        {   // An object that defines the columns in the table
+        'Feedback',  // Specify the table name
+        {   // Define the fields (columns) for the Feedback table
             name: {
                 type: DataTypes.STRING,
                 allowNull: true
@@ -25,7 +25,7 @@ module.exports = (sequelizeDatabase) => {
                 type: DataTypes.BOOLEAN,
                 allowNull: true,
                 get() {
-                    // if the database stores false, return 'no', if it stores true, return 'yes'
+                    // Return 'yes' if the stored value is true, otherwise return 'no'
                     if (this.getDataValue('isCurrentStudent')) {
                         return 'yes'
                     } else {
@@ -33,10 +33,10 @@ module.exports = (sequelizeDatabase) => {
                     }
                 },
                 set(newValue) {
-                    // convert 'yes' to true and 'no' to false to store in the database
+                    // Change 'yes' to true and 'no' to false before saving to the database
                     if (newValue === 'yes') {
                         this.setDataValue('isCurrentStudent', true)
-                    } else {  // the value is 'no'
+                    } else {  // Handle the 'no' value
                         this.setDataValue('isCurrentStudent', false)
                     }
                 }
@@ -48,11 +48,11 @@ module.exports = (sequelizeDatabase) => {
                 defaultValue: []
             }
 
-            // Sequelize will create a ID and a createdAt column by default
+            // Sequelize automatically adds an ID and a createdAt column
         }
     )
 
     Feedback.sync({ force: false }).then(() => console.log('Created Feedback table'))
 
-    return Feedback  // return the object that defines the table.
+    return Feedback  // Return the Feedback model so it can be used elsewhere in the app
 }
