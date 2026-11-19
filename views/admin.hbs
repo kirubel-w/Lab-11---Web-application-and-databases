@@ -1,8 +1,13 @@
+{{!-- Display the heading for the admin page --}}
 <h1>Admin Page, All Feedback</h1>
 
+{{!-- Check if there is feedback to display --}}
 {{# if feedback}}
+
+{{!-- Create a table to show all feedback records --}}
 <table>
     <thead>
+        {{!-- Set up the column headings --}}
         <th>ID</th>
         <th>Name</th>
         <th>Email</th>
@@ -14,8 +19,10 @@
 
     <tbody>
 
+        {{!-- Loop through each feedback record --}}
         {{#each feedback }}
         <tr>
+            {{!-- Display the information for each feedback entry --}}
             <td>{{ this.id }}</td>
             <td>{{ this.name }}</td>
             <td>{{ this.email }}</td>
@@ -29,6 +36,9 @@
 </table>
 
 {{else}}
+
+{{!-- Show this message if no feedback is available --}}
 <p>No feedback in database!</p>
 
+{{!-- End the feedback condition --}}
 {{/if}}
